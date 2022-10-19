@@ -61,7 +61,6 @@ def submit():
     display_set= OptionMenu(root, clicked, *sets_list)
     display_set.grid(row=1, column=1, padx=10, pady=10)
 
-    #display_name_input.delete(0, END)
 
 def search_price():
     global choice
@@ -180,7 +179,6 @@ def query_collection():
     c.execute('select * from owned_cards')
 
     collected= c.fetchall()
-    #print(type(collected))
 
     queried_card= query_collection_input.get()
     for x in collected:
