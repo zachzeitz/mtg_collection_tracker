@@ -6,7 +6,7 @@ import sqlite3
 
 root= Tk()
 root.title("MTG Collection Tracker")
-root.geometry("700x600")
+root.geometry("800x600")
 
 #create of connect to database
 conn= sqlite3.connect('mtg_card_collection.db')
@@ -32,11 +32,11 @@ def submit():
     
     #create button to find price for selected card and set
     search_price_button= Button(root, text="Search Price", command=search_price)
-    search_price_button.grid(row=5, column=0, padx=10, pady=10, columnspan=2, ipadx=110, sticky=N)
+    search_price_button.grid(row=6, column=0, padx=10, pady=10, columnspan=2, ipadx=110, sticky=N)
 
     #Create Button to Add Card to Database
     record_button= Button(root, text="Add Card To Database", command=add_to_database)
-    record_button.grid(row=6, column=0, padx=10, pady=10,columnspan=2, ipadx= 85, sticky=N)
+    record_button.grid(row=7, column=0, padx=10, pady=10,columnspan=2, ipadx= 85, sticky=N)
 
     sets_list.clear()
 
@@ -89,6 +89,8 @@ def search_price():
 
 
 def add_to_database():
+    global num_owned_input
+
     #create of connect to database
     conn= sqlite3.connect('mtg_card_collection.db')
     c=conn.cursor()
@@ -114,7 +116,7 @@ def get_cards():
     r=1
 
     top= Toplevel()
-    top.geometry("1100x850")
+    top.geometry("1300x850")
     top.title("Archived Collection")
 
     #create maine frame
@@ -147,10 +149,10 @@ def get_cards():
     card_price.grid(row=0, column=2)
     cards_quantity=Label(second_frame, text="Number Owned", font=('Times New Roman', 14, 'bold'))
     cards_quantity.grid(row=0, column=3)
-    add_criteria=Label(second_frame, text="Alternate Versions", font=('Times New Roman', 14, 'bold'))
+    add_criteria=Label(second_frame, text="Additional Criteria", font=('Times New Roman', 14, 'bold'))
     add_criteria.grid(row=0, column=4, padx=10)
 
-    #create of connect to database
+    #create or connect to database
     conn= sqlite3.connect('mtg_card_collection.db')
     c=conn.cursor()
 
@@ -174,6 +176,11 @@ def get_cards():
     conn.close()
 
 def query_collection():
+
+    top= Toplevel()
+    top.geometry("1300x850")
+    top.title("Archived Collection")
+
     conn= sqlite3.connect('mtg_card_collection.db')
     c=conn.cursor()
     c.execute('select * from owned_cards')
